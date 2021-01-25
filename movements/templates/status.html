@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="https://picocss.com/favicon.ico">
+        <link rel="stylesheet" href="movements/templates/style.css">
+        <link rel="canonical" href="https://picocss.com/#examples">
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
+
+        <title>MY CRYPTO -{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <h1 class="h1status">Estado de la inversion</h1>
+        </header>
+
+        <nav class="opciones">
+        
+            <li><a href="inicio.html">INICIO</a></li>
+            <li><a href="compra.html"> COMPRA </a></li>
+            <li><a href="#" aria-disabled="true">STATUS</a></li>
+            
+        </nav>
+        
+        <div class="valorinvertido">
+            valor invertido: {{ valor_invertido  }}
+            
+        </div>
+
+        <div class="valoractual">
+            valor actual: {{ valor_actual  }}
+        </div>
+        <footer>
+            &copy; 2021- TODOS LOS DERECHOS RESERVADOS
+        </footer>
+    </body>
+</html>

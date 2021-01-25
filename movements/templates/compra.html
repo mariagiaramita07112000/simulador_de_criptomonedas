@@ -1,0 +1,60 @@
+{% extends 'inicio.html' %}
+
+{% block title %} MY CRYPTO {% endblock %}
+
+{% block contenido %}
+
+    <form action="compra.html" method="POST">
+        
+
+        <div>
+            <input type="hidden" id="fname" name="to_quantity" value="{{to_quantity}}">
+        </div>
+
+        <div>
+            <input type="hidden" id="fname" name="PU" value="{{PU}}">
+        </div>
+
+            <div class="field">
+            {{ form.from_currency.label }}
+            {{ form.from_currency }}
+
+            </div>
+
+            <div class="field">
+
+                {{ form.from_quantity.label }}
+                {{ form.from_quantity }}
+
+            </div>
+            <div class="field">
+                {{ form.to_currency.label }}
+                {{ form.to_currency }}
+            </div>
+
+        <div class="field">
+            {{ form.submit }}
+        </div>
+
+        <div class="field">
+            Q2: {{ to_quantity }}
+        </div>
+
+        <div class="field">
+            PU: {{ PU }}
+        </div>
+        
+
+        {% if to_quantity != 0 %}
+            <div class="field" >
+                {{ form.submit2() }}
+            </div>
+        {% endif %}
+
+    </form>
+    
+
+
+
+{% endblock %}
+
