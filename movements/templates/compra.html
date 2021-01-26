@@ -3,7 +3,14 @@
 {% block title %} MY CRYPTO {% endblock %}
 
 {% block contenido %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pico.css') }}">
+
+<nav>
+    <ul>
+        <li><a href="/"> INICIO </a></li>
+        <li><a href="compra.html" aria-disabled="true">COMPRA</a></li>
+        <li><a href="status.html">STATUS</a></li>
+    </ul>
+</nav>
 
     <form action="compra.html" method="POST">
         
