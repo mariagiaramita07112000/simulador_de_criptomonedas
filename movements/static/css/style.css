@@ -1,5 +1,101 @@
-.h1status{
+.h1statuss{
     width: 500px;
     height: 20px;
-    float: right;
+    align-content: center;
+}
+
+.derechos{
+    opacity: 100%;
+    font-weight: bold;
+}
+
+.imagen-fondo{
+    background-image: url("https://images.unsplash.com/photo-1524673450801-b5aa9b621b76?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
+    background-size: cover;
+}
+
+.valorinvertido{
+    text-align: center;
+    font-weight: bold;
+    opacity: 100%;
+}
+
+.valoractual{
+    text-align: center;
+    font-weight: bold;
+    opacity: 100%;
+}
+
+.Q2{
+    float: left;
+    width: -webkit-fill-available;
+}
+
+.PU{
+    float: left;
+    width: -webkit-fill-available;
+}
+
+.boton{
+    width: 80px;
+    float:right
+}
+
+.tituloinicio{
+    text-align: center;
+    font-weight: bold;
+}
+
+.simuladorcrypto{
+    align-content: center;
+}
+
+.FROM{
+    height: 100px;
+    width: 300px;
+}
+
+.Q{
+    height: 100px;
+    width: 250px;
+}
+
+.TO{
+    height: 100px;
+    width: 300px;
+}
+
+.opciones123{
+    width: 200%;
+    margin: auto;
+    overflow:hidden;
+}
+
+.field{
+    width: 100px;
+    float: left;
+}
+
+
+.tabla{
+    border: 2px;
+    border-color: black;
+}
+
+.field2{
+    width: 100px;
+    float: left;
+}
+
+.simulador{
+    text-align: center;
+}
+
+.inver{
+    text-align: center;
+    opacity: 100%;
+}
+
+.derechos{
+    opacity: 100%;
 }

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/pico.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
+        
         <nav>
             <ul>
                 <li><a href="/"> INICIO </a></li>
@@ -16,9 +16,9 @@
 
         <title>MY CRYPTO -{% block title %}{% endblock %}</title>
     </head>
-    <body>
-        <header>
-            <h1 class="h1status">Estado de la inversion</h1>
+    <body class="imagen-fondo">
+        <header class="inver">
+            <h1>Estado de la Inversión</h1>
         </header>
         
         <div class="valorinvertido">
@@ -29,7 +29,7 @@
         <div class="valoractual">
             valor actual: {{ valor_actual  }}
         </div>
-        <footer>
+        <footer class="derechos">
             &copy; 2021- TODOS LOS DERECHOS RESERVADOS
         </footer>
     </body>

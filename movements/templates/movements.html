@@ -3,7 +3,7 @@
 
 {% block contenido %}
 
-<nav>
+<nav class="opciones123">
     <ul>
         <li><a href="/" aria-disabled="true"> INICIO </a></li>
         <li><a href="compra.html">COMPRA</a></li>
@@ -11,10 +11,10 @@
     </ul>
 </nav>
 
-<p>MIS MOVIMIENTOS</p>
+<p class="tituloinicio">MIS MOVIMIENTOS</p>
 {{datos|length}}
 {% if datos|length > 0 %}
-<table>
+<table class="tabla">
         <tr>
             <th>Fecha</th>
             <th>Hora</th>
@@ -44,7 +44,7 @@
     </table>
 
 
-    <button onclick="location.href='compra.html'"  type="button" class="btn btn-secondary btn-lg align-items-end"> + </button>
+    <button onclick="location.href='compra.html'"  class="boton"  type="button" class="btn btn-secondary btn-lg align-items-end"> + </button>
     
 
 

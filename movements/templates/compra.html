@@ -23,19 +23,19 @@
             <input type="hidden" id="fname" name="PU" value="{{PU}}">
         </div>
 
-            <div class="field">
+            <div class="FROM">
             {{ form.from_currency.label }}
             {{ form.from_currency }}
 
             </div>
 
-            <div class="field">
+            <div class="Q">
 
                 {{ form.from_quantity.label }}
                 {{ form.from_quantity }}
 
             </div>
-            <div class="field">
+            <div class="TO">
                 {{ form.to_currency.label }}
                 {{ form.to_currency }}
             </div>
@@ -44,17 +44,17 @@
             {{ form.submit }}
         </div>
 
-        <div class="field">
+        <div class="Q2">
             Q2: {{ to_quantity }}
         </div>
 
-        <div class="field">
+        <div class="PU">
             PU: {{ PU }}
         </div>
         
 
         {% if to_quantity != 0 %}
-            <div class="field" >
+            <div class="field2" >
                 {{ form.submit2() }}
             </div>
         {% endif %}
