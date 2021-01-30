@@ -24,9 +24,12 @@
         </div>
 
             <div class="FROM">
-            {{ form.from_currency.label }}
-            {{ form.from_currency }}
+                {{ form.from_currency.label }}
+                {{ form.from_currency }}
+            </div>
 
+            <div>
+                {{ form.from_currency.errors[0] }}
             </div>
 
             <div class="Q">
@@ -35,6 +38,11 @@
                 {{ form.from_quantity }}
 
             </div>
+
+            <div>
+                {{ form.from_quantity.errors[0] }}
+            </div>
+
             <div class="TO">
                 {{ form.to_currency.label }}
                 {{ form.to_currency }}

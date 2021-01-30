@@ -27,16 +27,12 @@ def listaIngresos():
 
 @app.route('/compra.html', methods=['GET','POST'])
 def compraNueva():
-    form= MovementForm()
+    form= MovementForm(csrf_enabled=False)
     to_quantity = 0
     PU = 0
-
-    if request.method== 'POST':
-        '''conn= sqlite3.connect("movements/data/basededatos.db")
-        c= conn.cursor()
-
-        c.execute("SELECT SUM(to_quantity) AS total, to_currency FROM movimientos WHERE to_currency =  GROUP BY to_currency")'''
-
+    print(form.validate_on_submit())
+    
+    if request.method== 'POST' and form.validate_on_submit():
 
         today= date.today()
         today_2= "{}/{}/{}".format(today.day, today.month , today.year)
@@ -85,25 +81,53 @@ def compraNueva():
 
 
 
+
 @app.route("/status.html", methods=["GET"])
 def status():
+    ingresos=0
+
     form= MovementForm()
     conn= sqlite3.connect("movements/data/basededatos.db")
     c= conn.cursor()
 
-    c.execute('SELECT SUM(to_quantity) AS total, to_currency FROM movimientos WHERE from_currency = "EUR" GROUP BY to_currency')
-    ingresos= c.fetchall()
 
     c.execute('SELECT SUM(from_quantity) AS total , from_currency FROM movimientos WHERE from_currency="EUR"')
-    ingresos2= c.fetchone()[0]
+    from_eur_quantity= c.fetchone()[0]
+
+    c.execute("SELECT SUM(to_quantity) AS total, to_currency FROM movimientos GROUP BY to_currency;")
+    to_currencies= c.fetchall()
+
+    c.execute("SELECT SUM(from_quantity) AS total, from_currency FROM movimientos GROUP BY from_currency")  
+    from_currencies= c.fetchall()
+
+    result_currencies = []
+
+    for to_currency in to_currencies:
+        result_currency = []
+        is_coincidence = False
+        print(to_currency[0])
+        for from_currency in from_currencies:
+            if to_currency[1] == from_currency[1]:
+                is_coincidence = True
+                result_currency.append(to_currency[0] - from_currency[0])
+                result_currency.append(to_currency[1])
+                result_currencies.append(result_currency)
+        if is_coincidence == False: 
+            result_currency.append(to_currency[0])
+            result_currency.append(to_currency[1])
+            result_currencies.append(result_currency)
+            
+
+    print(result_currencies)
+
 
     conn.close()
     suma = 0
 
-    for ingreso in ingresos:
+    for result_currency in result_currencies:
         apikey= '8cf2c866-52c9-47d1-a4f9-d06a347da773'
         url_api="https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount={}&symbol={}&convert={}&CMC_PRO_API_KEY={}"
-        respuesta= requests.get(url_api.format(ingreso[0], ingreso[1] ,"EUR", apikey))
+        respuesta= requests.get(url_api.format(result_currency[0], result_currency[1] ,"EUR", apikey))
         if respuesta.status_code == 200:
             datos= respuesta.json()
             suma += float(datos['data']['quote']['EUR']['price'])
@@ -111,8 +135,8 @@ def status():
     print(suma)
 
 
-    return render_template("status.html" , valor_invertido= ingresos2, valor_actual=suma)
+    return render_template("status.html" , valor_invertido= from_eur_quantity, valor_actual=suma)
 
-    
+
 
 
