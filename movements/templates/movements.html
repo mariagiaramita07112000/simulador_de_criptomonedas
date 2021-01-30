@@ -5,24 +5,26 @@
 
 <nav class="opciones123">
     <ul>
-        <li><a href="/" aria-disabled="true"> INICIO </a></li>
-        <li><a href="compra.html">COMPRA</a></li>
-        <li><a href="status.html">STATUS</a></li>
+        <li><a class="milista" href="/" aria-disabled="true"> INICIO </a></li>
+        <li><a  class="milista" href="compra.html">COMPRA</a></li>
+        <li><a class="milista" href="status.html">STATUS</a></li>
     </ul>
 </nav>
 
 <p class="tituloinicio">MIS MOVIMIENTOS</p>
+
 {{datos|length}}
 {% if datos|length > 0 %}
+
 <table class="tabla">
-        <tr>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>From</th>
-            <th>Q</th>
-            <th>To</th>
-            <th>Q2</th>
-            <th>PU</th>
+        <tr class="tabla2">
+            <th class="opcion">Fecha</th>
+            <th class="opcion">Hora</th>
+            <th class="opcion">From</th>
+            <th class="opcion">Q</th>
+            <th class="opcion">To</th>
+            <th class="opcion">Q2</th>
+            <th class="opcion">PU</th>
         </tr>
 
     {% for registro in datos %}

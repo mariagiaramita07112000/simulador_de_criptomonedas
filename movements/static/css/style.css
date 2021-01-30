@@ -14,26 +14,39 @@
     background-size: cover;
 }
 
+.imagen-fondo2{
+    background-image: url("https://fondosmil.com/fondo/16641.jpg");
+    background-size: cover;
+}
+
 .valorinvertido{
     text-align: center;
     font-weight: bold;
     opacity: 100%;
+    font-size: 25px;
+    margin-left: 40px;
 }
 
 .valoractual{
     text-align: center;
     font-weight: bold;
     opacity: 100%;
+    font-size: 25px;
+    margin-left: 70px;
 }
 
 .Q2{
     float: left;
     width: -webkit-fill-available;
+    opacity: 100%;
+    font-weight: bold;
 }
 
 .PU{
     float: left;
     width: -webkit-fill-available;
+    opacity: 100%;
+    font-weight: bold;
 }
 
 .boton{
@@ -53,16 +66,22 @@
 .FROM{
     height: 100px;
     width: 300px;
+    opacity: 100%;
+    font-weight: bold;
 }
 
 .Q{
     height: 100px;
     width: 250px;
+    opacity: 100%;
+    font-weight: bold;
 }
 
 .TO{
     height: 100px;
     width: 300px;
+    opacity: 100%;
+    font-weight: bold;
 }
 
 .opciones123{
@@ -98,4 +117,27 @@
 
 .derechos{
     opacity: 100%;
+}
+
+.milista{
+    float: right;
+    padding: 0;
+    margin: 0;
+    color: black;
+
+}
+
+.tabla{
+    border-collapse: collapse;
+    margin: 3px;
+    padding: 2px;
+    border: black 3px solid;
+}
+
+.tabla2{
+    border: black 3px solid;
+}
+
+.opcion{
+    border: black 1px solid;
 }
