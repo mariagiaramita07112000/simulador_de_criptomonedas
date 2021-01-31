@@ -12,11 +12,14 @@
 </nav>
 
 <p class="tituloinicio">MIS MOVIMIENTOS</p>
+{% for message in messages %}
+        <p class="error">{{ message }}</p>
+{% endfor %}
 
 {{datos|length}}
 {% if datos|length > 0 %}
 
-<table class="tabla">
+    <table class="tabla">
         <tr class="tabla2">
             <th class="opcion">Fecha</th>
             <th class="opcion">Hora</th>
@@ -45,9 +48,9 @@
         {% endif %}
     </table>
 
-
+    <div>
     <button onclick="location.href='compra.html'"  class="boton"  type="button" class="btn btn-secondary btn-lg align-items-end"> + </button>
-    
+    </div>
 
 
 {% endblock %}
