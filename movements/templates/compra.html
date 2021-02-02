@@ -28,7 +28,12 @@
             <div class="FROM">
                 <label for="from_currency">
                 {{ form.from_currency.label }}
-                {{ form.from_currency }}
+                {% if isAccept %}
+                    {{ form.from_currency.data }}
+                    {{ form.from_currency(class="hidden")}}
+                {% else %}
+                    {{ form.from_currency() }}
+                {% endif %}
             </label>
             </div>
 
@@ -56,7 +61,12 @@
             <div class="TO">
                 <label for="to_currency">
                 {{ form.to_currency.label }}
-                {{ form.to_currency }}
+                {% if isAccept %}
+                    {{ form.to_currency.data }}
+                    {{ form.to_currency(class="hidden")}}
+                {% else %}
+                    {{ form.to_currency() }}
+                {% endif %}
                 </label>
 
             </div>

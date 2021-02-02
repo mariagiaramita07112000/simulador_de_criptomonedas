@@ -99,13 +99,6 @@ def listaIngresos():
         return render_template("errores.html", datos=[] , form=form, messages=messages) 
 
 
-    
-
-    '''# llamo a mi fichero csv 
-    fIngresos= open("movements/data/basededatos.csv ", "r")
-    # leo linea a linea mi fichero 
-    csvReader= csv.reader(fIngresos, delimiter="," , quotechar='"')
-    ingresos= list(csvReader) '''
     return render_template("movements.html", datos=ingresos , form=form, messages=messages)  
 
 @app.route('/compra.html', methods=['GET','POST'])
@@ -147,10 +140,11 @@ def compraNueva():
                 messages.append("No se ha podido enviar la solicitud a la api, debido a que ha introducido una apikey invalida")
                 return render_template("errores.html", messages=messages)
 
-            '''else:
+            else:
                 print("se ha producido un error  ", respuesta.status_code)
                 messages.append("se ha producido un error en la consulta verifique por favor los datos")
-                return render_template("errores.html", messages=messages)'''
+                return render_template("errores.html", messages=messages)
+
         except Exception as e :
         
             print(f"no hemos podido conectar con la api{type(e).__name__} - {e} ")
@@ -252,6 +246,7 @@ def status():
 
     print(result_currencies)
     conn.close()
+    
     try:
         suma = 0
 
