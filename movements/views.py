@@ -1,6 +1,7 @@
 from movements import app
 from flask import render_template, request , redirect, url_for
 from movements.forms import MovementForm
+from config import apikey
 import csv 
 import sqlite3
 from datetime import datetime , date
@@ -13,32 +14,57 @@ def get_currencies():
     to_currencies=[]
     from_currencies=[]
 
+    try:
+        conn= sqlite3.connect("movements/data/basededatos.db")
+        c= conn.cursor()
 
-    conn= sqlite3.connect("movements/data/basededatos.db")
-    c= conn.cursor()
+    except Exception as e:
+        print(f"error al conectar con la base de datos {type(e).__name__} - {e} ")
+        messages.append(" error al conectar con la base de datos")
+        return render_template("errores.html", messages=messages)
 
-    c.execute("SELECT SUM(to_quantity) AS total, to_currency FROM movimientos GROUP BY to_currency;")
-    to_currencies= c.fetchall()
-    print(to_currencies)
-    c.execute("SELECT SUM(from_quantity) AS total, from_currency FROM movimientos GROUP BY from_currency")  
-    from_currencies= c.fetchall()
+    try:
+        c.execute("SELECT SUM(to_quantity) AS total, to_currency FROM movimientos GROUP BY to_currency;")
+        to_currencies= c.fetchall()
+        print(to_currencies)
 
-    result_currencies = []
-    for to_currency in to_currencies:
-        is_coincidence = False
-        for from_currency in from_currencies:
-            if to_currency[1] == from_currency[1]:
-                is_coincidence = True
-                if (to_currency[0] - from_currency[0]) > 0:
-                    result_currencies.append(to_currency[1])
-        if is_coincidence == False: 
-            result_currencies.append(to_currency[1])
+    except Exception as e:
+        print(f"error al obtener la suma de q {type(e).__name__} - {e} ")
+        messages.append(" error al obtener la suma de to")
+        return render_template("errores.html", messages=messages)
 
-    result_currencies.append('EUR')
+    try:
+        c.execute("SELECT SUM(from_quantity) AS total, from_currency FROM movimientos GROUP BY from_currency")  
+        from_currencies= c.fetchall()
 
-    conn.commit()
-    conn.close()
-    return result_currencies
+    except Exception as e:
+        print(f"error al conectar con la base de datos {type(e).__name__} - {e} ")
+        messages.append(" error al conectar con la base de datos")
+        return  render_template("errores.html", messages=messages)
+
+    try:
+        result_currencies = []
+        for to_currency in to_currencies:
+            is_coincidence = False
+            for from_currency in from_currencies:
+                if to_currency[1] == from_currency[1]:
+                    is_coincidence = True
+                    if (to_currency[0] - from_currency[0]) > 0:
+                        result_currencies.append(to_currency[1])
+            if is_coincidence == False: 
+                result_currencies.append(to_currency[1])
+
+        result_currencies.append('EUR')
+
+        conn.commit()
+        conn.close()
+        return result_currencies
+
+    except Exception as e:
+        print(f"error al añadir las currencies, verifique los datos {type(e).__name__} - {e} ")
+        messages.append(" error al añadir los datos ")
+        return  render_template("errores.html", messages=messages)
+
 
 def connection():
     succes=True
@@ -108,7 +134,6 @@ def compraNueva():
         convert= request.form.get("to_currency")
 
         try:
-            apikey= '8cf2c866-52c9-47d1-a4f9-d06a347da773'
             url_api="https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount={}&symbol={}&convert={}&CMC_PRO_API_KEY={}"
 
             respuesta= requests.get(url_api.format(amount, symbol , convert, apikey))
@@ -132,29 +157,33 @@ def compraNueva():
             messages.append("No se ha podido enviar la solicitud a la api, por favor comuniquese con el administrador")
             return render_template("errores.html", messages=messages)
 
+        try:
+            if request.form.get('submit2') is not None:
+                fIngresos= open("movements/data/basededatos.csv" , "w+" , newline="")
+                csvWriter = csv.writer(fIngresos, delimiter="," , quotechar='"')
+                csvWriter.writerow([request.form.get("Fecha") , request.form.get("Hora"), request.form.get("convert_From"), request.form.get("Q"), request.form.get("convert_To"), request.form.get("Q2"), request.form.get("PU")])
+                conn= sqlite3.connect("movements/data/basededatos.db")
+                c= conn.cursor()
 
-        if request.form.get('submit2') is not None:
-            fIngresos= open("movements/data/basededatos.csv" , "w+" , newline="")
-            csvWriter = csv.writer(fIngresos, delimiter="," , quotechar='"')
-            csvWriter.writerow([request.form.get("Fecha") , request.form.get("Hora"), request.form.get("convert_From"), request.form.get("Q"), request.form.get("convert_To"), request.form.get("Q2"), request.form.get("PU")])
-            conn= sqlite3.connect("movements/data/basededatos.db")
-            c= conn.cursor()
 
+                c.execute('INSERT INTO movimientos (date, time, from_currency, from_quantity, to_currency, to_quantity, "PU") VALUES (?,?,?,?,?,?,?);', 
+                (
+                    today_2,
+                    time,
+                    request.form.get('from_currency'),
+                    float(request.form.get('from_quantity')),
+                    request.form.get('to_currency'),
+                    float(request.form.get('to_quantity')),
+                    float(request.form.get("PU"))
 
-            c.execute('INSERT INTO movimientos (date, time, from_currency, from_quantity, to_currency, to_quantity, "PU") VALUES (?,?,?,?,?,?,?);', 
-            (
-                today_2,
-                time,
-                request.form.get('from_currency'),
-                float(request.form.get('from_quantity')),
-                request.form.get('to_currency'),
-                float(request.form.get('to_quantity')),
-                float(request.form.get("PU"))
-
-            ))
-            conn.commit()
-            conn.close()
-            return redirect(url_for("listaIngresos"))
+                ))
+                conn.commit()
+                conn.close()
+                return redirect(url_for("listaIngresos"))
+        except Exception as e:
+            print(f"error en la base de datos {type(e).__name__} - {e} ")
+            messages.append("error al conectar con la base de datos ")
+            return render_template("errores.html", messages=messages)
     
 
 
@@ -165,23 +194,45 @@ def compraNueva():
 
 @app.route("/status.html", methods=["GET"])
 def status():
-    ingresos=0
-
     form= MovementForm()
-    conn= sqlite3.connect("movements/data/basededatos.db")
-    c= conn.cursor()
+    ingresos=0
+    try:
+        
+        conn= sqlite3.connect("movements/data/basededatos.db")
+        c= conn.cursor()
+    except Exception as e:
+        print(f"error al conectar con la base de datos {type(e).__name__} - {e} ")
+        messages.append(" error al conectar con la base de datos")
+        return render_template("errores.html", messages=messages)
 
+    try:
+        c.execute('SELECT SUM(from_quantity) AS total , from_currency FROM movimientos WHERE from_currency="EUR"')
+        from_eur_quantity= c.fetchone()[0]
 
-    c.execute('SELECT SUM(from_quantity) AS total , from_currency FROM movimientos WHERE from_currency="EUR"')
-    from_eur_quantity= c.fetchone()[0]
+    except Exception as e:
+        print(f"error de consulta {type(e).__name__} - {e} ")
+        messages.append(" no se ha podido obtener el valor en EUR, por favor verifique los datos")
+        return render_template("errores.html", messages=messages)
 
-    c.execute("SELECT SUM(to_quantity) AS total, to_currency FROM movimientos GROUP BY to_currency;")
-    to_currencies= c.fetchall()
+    try:
+        c.execute("SELECT SUM(to_quantity) AS total, to_currency FROM movimientos GROUP BY to_currency;")
+        to_currencies= c.fetchall()
 
-    c.execute("SELECT SUM(from_quantity) AS total, from_currency FROM movimientos GROUP BY from_currency")  
-    from_currencies= c.fetchall()
+    except Exception as e:
+        print(f"error de consulta {type(e).__name__} - {e} ")
+        messages.append(" no se ha podido obtener la suma total , por favor verifique los datos")
+        return render_template("errores.html", messages=messages)
 
-    result_currencies = []
+    try:
+        c.execute("SELECT SUM(from_quantity) AS total, from_currency FROM movimientos GROUP BY from_currency")  
+        from_currencies= c.fetchall()
+    
+        result_currencies = []
+    except Exception as e:
+        print(f"error en la base de datos {type(e).__name__} - {e} ")
+        messages.append("error al conectar con la base de datos, verifique los datos introducidos ")
+        return render_template("errores.html", messages=messages)
+
 
     for to_currency in to_currencies:
         result_currency = []
@@ -189,7 +240,7 @@ def status():
         print(to_currency[0])
         for from_currency in from_currencies:
             if to_currency[1] == from_currency[1]:
-                is_coincidence = True
+                is_coincidence == True
                 result_currency.append(to_currency[0] - from_currency[0])
                 result_currency.append(to_currency[1])
                 result_currencies.append(result_currency)
@@ -197,23 +248,26 @@ def status():
             result_currency.append(to_currency[0])
             result_currency.append(to_currency[1])
             result_currencies.append(result_currency)
-            
+
 
     print(result_currencies)
-
-
     conn.close()
-    suma = 0
+    try:
+        suma = 0
 
-    for result_currency in result_currencies:
-        apikey= '8cf2c866-52c9-47d1-a4f9-d06a347da773'
-        url_api="https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount={}&symbol={}&convert={}&CMC_PRO_API_KEY={}"
-        respuesta= requests.get(url_api.format(result_currency[0], result_currency[1] ,"EUR", apikey))
-        if respuesta.status_code == 200:
-            datos= respuesta.json()
-            suma += float(datos['data']['quote']['EUR']['price'])
-            print(datos['data'] ['quote'] ['EUR'] ['price'])
-    print(suma)
+        for result_currency in result_currencies:
+            url_api="https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount={}&symbol={}&convert={}&CMC_PRO_API_KEY={}"
+            respuesta= requests.get(url_api.format(result_currency[0], result_currency[1] ,"EUR", apikey))
+            if respuesta.status_code == 200:
+                datos= respuesta.json()
+                suma += float(datos['data']['quote']['EUR']['price'])
+                print(datos['data'] ['quote'] ['EUR'] ['price'])
+        print(suma)
+
+    except Exception as e:
+        print(f"error de respuesta en la api {type(e).__name__} - {e} ")
+        messages.append("se ha producido un error de respuesta en la api , por favor verifique los datos introducidos ")
+        return render_template("errores.html", messages=messages)
 
 
     return render_template("status.html" , valor_invertido= from_eur_quantity, valor_actual=suma)

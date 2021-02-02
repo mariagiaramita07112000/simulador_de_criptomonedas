@@ -2,3 +2,4 @@ venv/
 __pycache__/
 movements/__pycache__/
 config.py
+.env/

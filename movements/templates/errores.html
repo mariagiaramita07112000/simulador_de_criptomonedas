@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pico.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>ERRORES</title>
 
 </head>
-<body>
+<body class="errores">
+    <div class="imagen-errores">
+        <img src="https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5ldS1jZW50cmFsLTEuYW1hem9uYXdzLmNvbS9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjAtMTAvNjE0YmJlZDItNmNmNS00YTc3LTg2NWYtOWU2Y2ViOGM5MDIwLmpwZw==.jpg" alt="imagen-errores">
+    </div>
     {% for message in messages %}
         <p class="error">{{ message }}</p>
     {% endfor %}

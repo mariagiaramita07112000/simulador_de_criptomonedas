@@ -142,3 +142,19 @@
 .opcion{
     border: black 1px solid;
 }
+
+.errores{
+    background-color: aqua;
+    
+}
+
+.error{
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.imagen-errores{
+    max-width: 300px;
+    height: auto;
+    float: initial;
+}

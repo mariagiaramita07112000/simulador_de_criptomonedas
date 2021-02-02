@@ -56,7 +56,7 @@ def validate_quantity(form,field):
 
     print(result)
     print(form.data["from_quantity"])
-    if float(form.data['from_quantity']) > result:
+    if float(form.data['from_quantity']) > result and form.data['from_currency'] != 'EUR':
         print(form.data['from_quantity'])
         raise ValidationError('no tienes suficiente saldo')
 
