@@ -162,3 +162,8 @@
 .hidden {
     visibility: hidden;
 }
+
+.boton-de-errores{
+    width: 80px;
+    float:right
+}
