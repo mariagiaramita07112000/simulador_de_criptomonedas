@@ -10,6 +10,7 @@ import requests
 
 messages=[]
 
+
 def get_currencies():
     to_currencies=[]
     from_currencies=[]
@@ -230,11 +231,11 @@ def status():
     try:
         for to_currency in to_currencies:
             result_currency = []
-            is_coincidence == False
+            is_coincidence = False
             print(to_currency[0])
             for from_currency in from_currencies:
                 if to_currency[1] == from_currency[1]:
-                    is_coincidence == True
+                    is_coincidence = True
                     result_currency.append(to_currency[0] - from_currency[0])
                     result_currency.append(to_currency[1])
                     result_currencies.append(result_currency)

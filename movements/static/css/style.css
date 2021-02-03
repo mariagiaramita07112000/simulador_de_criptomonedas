@@ -169,7 +169,8 @@
     height: 90px;
 }
 
-.boton-de-errores{
-    width: 80px;
-    float:right
+.boton-volver{
+    float: left;
+    width: 100px;
+    margin: 5px;
 }
