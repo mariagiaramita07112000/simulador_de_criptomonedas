@@ -19,7 +19,7 @@ def validate_quantity(form,field):
 
     except Exception as e:
         print(f"no se ha podido conectar con la base de datos{str(e)}")
-        messages.append("error al conectar la api")
+        messages.append("error al conectar con la base de datos")
         return render_template("errores.html", messages=messages)
     
     try:

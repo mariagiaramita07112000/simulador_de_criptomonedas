@@ -227,21 +227,25 @@ def status():
         messages.append("error al conectar con la base de datos, verifique los datos introducidos ")
         return render_template("errores.html", messages=messages)
 
-
-    for to_currency in to_currencies:
-        result_currency = []
-        is_coincidence = False
-        print(to_currency[0])
-        for from_currency in from_currencies:
-            if to_currency[1] == from_currency[1]:
-                is_coincidence == True
-                result_currency.append(to_currency[0] - from_currency[0])
+    try:
+        for to_currency in to_currencies:
+            result_currency = []
+            is_coincidence == False
+            print(to_currency[0])
+            for from_currency in from_currencies:
+                if to_currency[1] == from_currency[1]:
+                    is_coincidence == True
+                    result_currency.append(to_currency[0] - from_currency[0])
+                    result_currency.append(to_currency[1])
+                    result_currencies.append(result_currency)
+            if is_coincidence == False: 
+                result_currency.append(to_currency[0])
                 result_currency.append(to_currency[1])
                 result_currencies.append(result_currency)
-        if is_coincidence == False: 
-            result_currency.append(to_currency[0])
-            result_currency.append(to_currency[1])
-            result_currencies.append(result_currency)
+    except Exception as e:
+        print(f"error al obtener el resultado {type(e).__name__} - {e} ")
+        messages.append("error al obtener el resultado ")
+        return render_template("errores.html", messages=messages)
 
 
     print(result_currencies)

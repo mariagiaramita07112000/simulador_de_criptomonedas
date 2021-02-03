@@ -163,6 +163,12 @@
     visibility: hidden;
 }
 
+.boton-errores{
+    float: right;
+    width: 100px;
+    height: 90px;
+}
+
 .boton-de-errores{
     width: 80px;
     float:right
