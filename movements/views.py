@@ -162,7 +162,7 @@ def compraNueva():
                 c= conn.cursor()
 
 
-                c.execute('INSERT INTO movimientos (date, time, from_currency, from_quantity, to_currency, to_quantity, "PU") VALUES (?,?,?,?,?,?,?);', 
+                c.execute('INSERT INTO movimientos (date, time, from_currency, from_quantity, to_currency, to_quantity , "PU") VALUES (?,?,?,?,?,?,?);', 
                 (
                     today_2,
                     time,

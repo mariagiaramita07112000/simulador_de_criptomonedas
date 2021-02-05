@@ -177,3 +177,20 @@
     margin: 5px;
     float: left;
 }
+
+.boton-errores-inicio{
+    width: 150px;
+    height: 70px;
+    margin-top: 60px;
+    margin: 5px;
+    float: left;
+    text-align: center;
+}
+
+.boton-errores-compra{
+    width: 150px;
+    height: 70px;
+    margin-top: 60px;
+    margin: 5px;
+    float:right;
+}
