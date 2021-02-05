@@ -1,5 +1,8 @@
 venv/
 __pycache__/
 movements/__pycache__/
-config.py
+config_template.py
 .env/
+/movements/data/basededatos.db/
+
+

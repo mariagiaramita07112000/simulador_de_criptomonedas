@@ -3,16 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MY CRYPTO -{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/pico.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
+    </head>
         <body class="imagen-fondo2">
             <header class="simulador">
                 <h1>Simulador de criptomonedas</h1>
             </header>
-        <head>
-        <title>MY CRYPTO -{% block title %}{% endblock %}</title>
-    </head>
 
         <section>
             {% block contenido %} {% endblock %}

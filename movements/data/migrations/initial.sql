@@ -8,4 +8,4 @@ CREATE TABLE "movimientos" (
 	"to_quantity"	REAL NOT NULL,
 	"PU"	REAL NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
-)
+);

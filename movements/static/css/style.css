@@ -12,6 +12,7 @@
 .imagen-fondo{
     background-image: url("https://images.unsplash.com/photo-1524673450801-b5aa9b621b76?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
     background-size: cover;
+    
 }
 
 .imagen-fondo2{
@@ -51,7 +52,8 @@
 
 .boton{
     width: 80px;
-    float:right
+    float:right;
+    margin: 5px;
 }
 
 .tituloinicio{
@@ -91,8 +93,11 @@
 }
 
 .field{
-    width: 100px;
+    width: 150px;
+    height: 70px;
     float: left;
+    margin: 15px;
+    display: inline-grid;
 }
 
 
@@ -118,6 +123,8 @@
 
 .derechos{
     opacity: 100%;
+    text-align: right;
+    margin-bottom: 10px;
 }
 
 .milista{
@@ -163,14 +170,10 @@
     visibility: hidden;
 }
 
-.boton-errores{
-    float: right;
-    width: 100px;
-    height: 90px;
-}
-
-.boton-volver{
-    float: left;
-    width: 100px;
+.boton-volver-a-calcular{
+    width: 150px;
+    height: 70px;
+    margin-top: 60px;
     margin: 5px;
+    float: left;
 }

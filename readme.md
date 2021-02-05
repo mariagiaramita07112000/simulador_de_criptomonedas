@@ -21,22 +21,13 @@ pip install -r requirements.txt
 ´´´
 paso 3 :
 
-Deberas crearte tu propia apikey en coinmarketcap 
+Deberas crearte tu propia apikey en coinmarketcap  e introducirla en el fichero config_template.py de la siguiente manera:
+apikey:"aqui dentro tu api"
 
 https://coinmarketcap.com/api/
 
 paso 4: 
-deberas crearte tu propia base de datos en sqlite le pondras por nombre basededatos.db en la cual deberas crearte una tabla a la que le pondras por nombre movimientos y se podran resgistrar los siguientes datos:
-id = integer
-data = text NOT NULL
-time= text NOT NULL 
-from_currency= text NOT NUL 
-from_quantity= REAL NOT NUL
-to_currency= text NOT NUL 
-to_quantity= real NOT NUL 
-PU= REAL NOT NOUL 
-
-debes instroducir las claves en un fichero al que llamaras config.py
+deberas crearte tu propia base de datos en sqlite le pondras por nombre basededatos.db crearas la tabla con los datos indicados en la carpeta migrations , fichero intial.sql en CREATE TABLE donde estan registradas las sentencias que debes tener en tu tabla. 
 
 deberas crearte un fichero llamado .env en el cual tendras los siguientes datos :
 FLASK_APP=run.py
