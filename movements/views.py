@@ -6,7 +6,7 @@ from config_template import *
 import csv 
 import sqlite3
 from datetime import datetime , date
-import coinmarketcapapi
+import coinmarketcap
 import requests
 
 messages=[]
