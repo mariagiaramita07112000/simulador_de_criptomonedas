@@ -2,7 +2,6 @@ from movements import app
 from flask import render_template, request , redirect, url_for
 from movements.forms import MovementForm
 from config import *
-from config_template import *
 import csv 
 import sqlite3
 from datetime import datetime , date

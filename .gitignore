@@ -1,7 +1,7 @@
 venv/
 __pycache__/
 movements/__pycache__/
-config_template.py
+config.py
 /movements/data/basededatos.db
 /movements/data/basededatos.db-journal
 /movements/data/basededatos.csv

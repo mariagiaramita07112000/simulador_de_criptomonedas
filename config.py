@@ -1,2 +1,2 @@
-SECRET_KEY="introduce tu clave de csrf aqui "
-apikey= 'introduce tu apikey aqui '
+SECRET_KEY="CLAVEDEMARIA"
+apikey="8cf2c866-52c9-47d1-a4f9-d06a347da773"

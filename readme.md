@@ -12,6 +12,8 @@ paso 1:
 
 Tendras tambien que crear tu entorno virtual (venv)
 
+python -m venv venv
+
 paso 2 : 
 
 para instalar las dependencias ejecutar
@@ -21,17 +23,14 @@ pip install -r requirements.txt
 ´´´
 paso 3 :
 
-Deberas crearte tu propia apikey en coinmarketcap  e introducirla en el fichero config_template.py de la siguiente manera:
-apikey:"aqui dentro tu api"
-
-https://coinmarketcap.com/api/
+Deberas crearte tu propia apikey en coinmarketcap entrando en https://coinmarketcap.com/api/ e introducirla creando un fichero config.py como el config_template.py que tienes en el repositorio
 
 paso 4: 
 deberas crearte tu propia base de datos en sqlite le pondras por nombre basededatos.db crearas la tabla con los datos indicados en la carpeta migrations , fichero intial.sql en CREATE TABLE donde estan registradas las sentencias que debes tener en tu tabla. 
 
 para eso debes :
 desde el directorio data desde el directorio /data ejecutar
-sqlite3 <nombre_bd>.db
+sqlite3 <basededatos>.db
 Desde la consola de sqlite3 
 ejecutar
 .read migrations/initial.sql
