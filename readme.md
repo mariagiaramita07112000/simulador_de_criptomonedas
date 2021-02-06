@@ -45,7 +45,13 @@ FLASK_APP=run.py
 FLASK_ENV=development
 
 luego de añadir el .env debes hacer en la terminal los siguientes pasos :
+en linux o mac:
+export FLASK_APP="run.py
+
+en Windows:
 set $FLAS_APP=run.py
+
 flask run para iniciar el programa 
+
 
 para acceder a la aplicacion en linea debes acceder a http://18.219.180.203/
