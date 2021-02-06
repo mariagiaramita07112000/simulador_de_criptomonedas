@@ -29,6 +29,18 @@ https://coinmarketcap.com/api/
 paso 4: 
 deberas crearte tu propia base de datos en sqlite le pondras por nombre basededatos.db crearas la tabla con los datos indicados en la carpeta migrations , fichero intial.sql en CREATE TABLE donde estan registradas las sentencias que debes tener en tu tabla. 
 
+para eso debes :
+desde el directorio data desde el directorio /data ejecutar
+sqlite3 <nombre_bd>.db
+Desde la consola de sqlite3 
+ejecutar
+.read migrations/initial.sql
+Comprobar que se han creado las tablas
+.tables
+Salir
+.q
+
+
 deberas crearte un fichero llamado .env en el cual tendras los siguientes datos :
 FLASK_APP=run.py
 FLASK_ENV=development
