@@ -43,3 +43,9 @@ Salir
 deberas crearte un fichero llamado .env en el cual tendras los siguientes datos :
 FLASK_APP=run.py
 FLASK_ENV=development
+
+luego de añadir el .env debes hacer en la terminal los siguientes pasos :
+set $FLAS_APP=run.py
+flask run para iniciar el programa 
+
+para acceder a la aplicacion en linea debes acceder a http://18.219.180.203/
